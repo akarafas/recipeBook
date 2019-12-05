@@ -14,7 +14,7 @@ const renderHomePage = function() {
               </div>
               <div class="section buttons">
                 <button id="login_button" class="button is-link is-light">Login</button>
-                <button id="singup_button" class="button is-link is-light">Sign Up</button>
+                <button id="signup_button" class="button is-link is-light">Sign Up</button>
               </div>
             </div>
           </section>
