@@ -14,7 +14,7 @@ const renderPrivateHomePage = function() {
               </div>
               <div class="section buttons">
                 <button id="profile_button" class="button is-link is-light">View Profile</button>
-                <button id="logout_button" class="button is-link is-light">Log Out</button>
+                <button id="logout_button" class="button is-danger is-light">Log Out</button>
               </div>
             </div>
           </section>
