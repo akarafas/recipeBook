@@ -21,9 +21,6 @@ const renderHomePage = function() {
           <div class="tabs is-medium">
             <ul>
               <li class="is-active"><a>Recipes</a></li>
-              <li><a>Planning</a></li>
-              <li><a>Find store</a></li>
-              <li><a>Find recipes</a></li>
             </ul>
           </div>
         </div>
