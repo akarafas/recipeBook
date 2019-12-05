@@ -1,2 +1,11 @@
 {
+  "users": {
+    "estahle": {
+      "passwordHash": "$2a$10$tAZ4OYY9FjfzGjjQQ9aa6etRjxEmkMTKekk7wJG7F5tfodtSTwKpm",
+      "data": {
+        "fullName": "Emily Stahle",
+        "email": "marvelannia@ymail.com"
+      }
+    }
+  }
 }

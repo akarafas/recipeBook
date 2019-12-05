@@ -1,5 +1,7 @@
+
 const renderHomePage = function() {
-    $('#root').on("click", "#back_button", handleBackButton);
+    $('#root').on("click", "#back_button", handleBackButtonPress);
+    $('#root').on("click", "#submit_button", handleSubmitButtonPress);
     return `<div>
     <section class="hero is-white">
         <div class="container">
@@ -16,22 +18,22 @@ const renderHomePage = function() {
 
     <label class="label">Name</label>
     <div class="control">
-      <input class="input" type="text" placeholder="Enter first and last name">
+      <input id="name" class="input" type="text" placeholder="Enter first and last name">
     </div>
 
     <label class="label">Username</label>
     <div class="control">
-      <input class="input" type="text" placeholder="Create username here">
+      <input id="username" class="input" type="text" placeholder="Create username here">
     </div>
 
     <label class="label">Password</label>
     <div class="control">
-      <input class="input" type="text" placeholder="Enter password here">
+      <input id="password" class="input" type="text" placeholder="Enter password here">
     </div>
 
     <label class="label">Email</label>
     <div class="control">
-        <input class="input" placeholder="Enter email address here" type="text">
+        <input id="email" class="input" placeholder="Enter email address here" type="text">
     </div>
   
     <div class="control">
@@ -42,7 +44,7 @@ const renderHomePage = function() {
     </div>
   
     <div class="section is-small">
-      <button class="button is-link">Submit</button>
+      <button id="submit_button" class="button is-link">Submit</button>
       <button id="back_button" class="button is-link is-light">Cancel</button>
     </div>
     </div>
@@ -50,12 +52,41 @@ const renderHomePage = function() {
     </div>`
   };
   
-  const handleBackButton = function (event) {
+  const handleBackButtonPress = function (event) {
     event.preventDefault();
     event.stopImmediatePropagation();
     location.href=`../index.html`;
   
   };
+
+  const handleSubmitButtonPress = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    let username = $('#username').val();
+    let password = $('#password').val();
+    let name = $('#name').val();
+    let email = $('#email').val();
+
+    async function createAccount() {
+      await axios({
+        method: 'POST',
+        url:'http://localhost:3000/account/create',
+        data: {
+          "name": username,
+          "pass": password,
+          "data": {
+            "fullName": name,
+            "email": email
+          }
+        }
+      });
+    }
+
+    createAccount();
+
+    location.href=`../private_homepage/index.html`;
+  }
   
   
   const loadDom = function() {
