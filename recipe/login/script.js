@@ -1,38 +1,52 @@
 const renderHomePage = function() {
-  $('#root').on("click", "#back_button", handleBackButton);
+  $('#root').on("click", "#cancel_button", handleCancelButton);
+  $('#root').on("click", "#submit_button", handleSubmitButton);
   return `<div>
-        <section class="hero is-bold is-dark">
-          <div class="hero-body">
+        <section class="hero is-white">
             <div class="container">
-              <h1 class="title">
-                Recipe Book
-              </h1>
-              <h2 class="subtitle">
-                COMP426
-              </h2>
             </div>
             <div class="section buttons">
-              <button id="back_button" class="button is-link is-light">Back</button>
             </div>
-          </div>
         </section>
         
       </div>
       <div class="container is-fluid">
-        <div class="notification">
-          place login stuff?
+        <div class="notification"><div>
+          <div class="field">
+          <h1 class="title is-2">Login</h1>
+          <label class="title is-6">Username</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Enter Username here">
+            <label class="title is-6">Password</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Enter password here">
+          <div class="section is-small">
+            <button id="cancel_button" class="button is-danger is-light">Cancel</button>
+            <button id="submit_button" class="button is-primary" type="submit" value="Submit">Login</button>
+          </div>
+        </div>
+      </div>
+</div>  
+
+
+
         </div>
       </div>`
 };
 
-const handleBackButton = function (event) {
+const handleCancelButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   location.href=`../index.html`;
 
 };
 
+const handleSubmitButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../private_homepage/index.html`;
 
+};
 
 
 const loadDom = function() {
