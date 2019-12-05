@@ -1,7 +1,7 @@
 const renderPrivateHomePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
-    $('#root').on("click", "#store_button", handleStoreButton);
+    $('#root').on("click", "#recipes_button", handleRecipesButton);
     return `<div>
           <section class="hero is-bold is-dark">
             <div class="hero-body">
@@ -21,7 +21,7 @@ const renderPrivateHomePage = function() {
           </section>
           <div class="tabs is-medium">
             <ul>
-              <li><a>Recipes</a></li>
+              <li id="recipes_button"><a>Recipes</a></li>
               <li id="store_button" class="is-active"><a>Find store</a></li>
             </ul>
           </div>
@@ -46,10 +46,10 @@ const handleLogoutButton = function (event) {
     location.href=`../index.html`;
   };
 
-  const handleStoreButton = function (event) {
+  const handleRecipesButton = function (event) {
     event.preventDefault();
     event.stopImmediatePropagation();  
-    location.href=`../mapquest_api/index.html`;
+    location.href=`../private_homepage/index.html`;
   };
 
 
