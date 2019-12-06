@@ -6,6 +6,13 @@
         "fullName": "Emily Stahle",
         "email": "marvelannia@ymail.com"
       }
+    },
+    "amydeng7": {
+      "passwordHash": "$2a$10$mRjzD/uQL9nqOeDm9CpgXuqnBfG7wWMTvQ6H3.toAwHeyjLzPDL9q",
+      "data": {
+        "fullName": "Amy Deng",
+        "email": "amydeng7@live.unc.edu"
+      }
     }
   }
 }
