@@ -2,7 +2,8 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#store_button", handleStoreButton);
-    return `<div>
+    $('#root').on("click", "#postTweet_button", handlePostButtonPress);
+    return `<div id="everything">
           <section class="hero is-bold is-dark">
             <div class="hero-body">
               <div class="container">
@@ -19,19 +20,90 @@ const renderPrivateHomePage = function() {
               </div>
             </div>
           </section>
+
+          <section class="hero is-warning" id="postTweet">
+          <div class="hero-body">
+          <div class="container">
+          <h1 class="title">
+            Post Your Recipe!
+          </h1>
+          <h2 class="subtitle">
+          <br>
+          <button type="button" class="button is-dark level-item" id="postTweet_button">Post!</button>
+          </h2>
+          </div>
+          </div>
+          </section>
+
           <div class="tabs is-medium">
             <ul>
               <li class="is-active"><a>Recipes</a></li>
               <li id="store_button"><a>Find store</a></li>
             </ul>
           </div>
-        </div>
+        
         <div class="container is-fluid">
           <div class="notification">
             render recipe feed here!!!
           </div>
+        </div>
         </div>`
   };
+
+  // create tweets in textarea
+const renderCreate = function() {
+  $('#root').on("click", "#create_button", handleCreateButtonPress);
+  $('#root').on("click", "#posttweetCancel_button", handlePostCancelButtonPress);
+  return `<section class="hero is-warning" id="create">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Create Your Recipe Post Here:
+      </h1>
+      <div id="newRecipe">
+      <h2 class="title is-4">
+      Title:
+      </h2>
+      <div><textarea id = "newRecipe_title" class="textarea" placeholder="Ex. The Yummiest Christmas Cookies!" rows="1"></textarea></div>
+      <br>
+      <h2 class="title is-4">
+      Ingredients:
+      </h2>
+      <div><textarea id = "newRecipe_ing" class="textarea" placeholder="Ex. 2 cups of flour..."></textarea></div>
+      <br>
+      <h3 class="title is-4">
+      Procedure:
+      </h3>
+      <div><textarea id = "newRecipe_inst" class="textarea" placeholder="Ex. Step 1. Heat the oven to 350 degrees..."></textarea></div>
+      <br>
+      <button type="button" class="button is-primary" id="create_button">Post!</button>
+      <button type="button" class="button is-dark" id="posttweetCancel_button">Cancel</button>
+      </div>
+    </div>
+  </div>
+  </section>`
+};
+
+// create tweet button press
+const handleCreateButtonPress = function(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  // insert stuff here // 
+
+};
+
+const handlePostCancelButtonPress = function() {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  $('#everything').replaceWith(renderPrivateHomePage());
+};
+
+const handlePostButtonPress = function() {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  $('#postTweet').replaceWith(renderCreate());
+}
 
 const handleProfileButton = function (event) {
     event.preventDefault();
