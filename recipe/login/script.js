@@ -16,10 +16,10 @@ const renderHomePage = function() {
           <h1 class="title is-2">Login</h1>
           <label class="title is-6">Username</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Enter Username here">
+            <input id="username" class="input" type="text" placeholder="Enter Username here">
             <label class="title is-6">Password</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Enter password here">
+              <input id="password" class="input" type="password" placeholder="Enter password here">
           <div class="section is-small">
             <button id="cancel_button" class="button is-danger is-light">Cancel</button>
             <button id="submit_button" class="button is-primary" type="submit" value="Submit">Login</button>
@@ -44,8 +44,30 @@ const handleCancelButton = function (event) {
 const handleSubmitButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
-  location.href=`../private_homepage/index.html`;
 
+  let username = $('#username').val();
+  let password = $('#password').val();
+
+  async function loginToAccount() {
+    try {
+      const result = await axios({
+        method: 'POST',
+        url:'http://localhost:3000/account/login',
+        data: {
+          "name": username,
+          "pass": password
+        }
+      });
+  
+      localStorage.setItem('jwt', result.jwt);
+      location.href=`../private_homepage/index.html`;
+    }
+    catch(error) {
+      return alert("Incorrect username or password, try again.")
+    }
+  }
+
+  loginToAccount();
 };
 
 
