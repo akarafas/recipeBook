@@ -81,6 +81,17 @@ const renderHomePage = function() {
           }
         }
       });
+
+      const result = await axios({
+        method: 'POST',
+        url:'http://localhost:3000/account/login',
+        data: {
+          "name": username,
+          "pass": password
+        }
+      });
+  
+      localStorage.setItem('jwt', result.jwt);
     }
 
     createAccount();
