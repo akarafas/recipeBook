@@ -64,17 +64,17 @@ const renderCreate = function() {
       <h2 class="title is-4">
       Title:
       </h2>
-      <div><textarea id = "newRecipe_title" class="textarea" placeholder="Ex. The Yummiest Christmas Cookies!" rows="1"></textarea></div>
+      <div><textarea id="newRecipe_title" class="textarea" placeholder="Ex. The Yummiest Christmas Cookies!" rows="1"></textarea></div>
       <br>
       <h2 class="title is-4">
       Ingredients:
       </h2>
-      <div><textarea id = "newRecipe_ing" class="textarea" placeholder="Ex. 2 cups of flour..."></textarea></div>
+      <div><textarea id="newRecipe_ing" class="textarea" placeholder="Ex. 2 cups of flour..."></textarea></div>
       <br>
       <h3 class="title is-4">
       Procedure:
       </h3>
-      <div><textarea id = "newRecipe_inst" class="textarea" placeholder="Ex. Step 1. Heat the oven to 350 degrees..."></textarea></div>
+      <div><textarea id="newRecipe_inst" class="textarea" placeholder="Ex. Step 1. Heat the oven to 350 degrees..."></textarea></div>
       <br>
       <button type="button" class="button is-primary" id="create_button">Post!</button>
       <button type="button" class="button is-dark" id="posttweetCancel_button">Cancel</button>
@@ -89,8 +89,31 @@ const handleCreateButtonPress = function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
 
-  // insert stuff here // 
+  let title = $('#newRecipe_title').val();
+  let ing = $('#newRecipe_ing').val();
+  let inst = $('#newRecipe_inst').val();
 
+  async function createRecipe() {
+    await axios({
+      method: 'POST',
+      url: `http://localhost:3000/public/recipes/${title}`,
+      data: {
+        ing: ing,
+        inst: inst
+      }
+    });
+  
+    await axios({
+      method: 'POST',
+      url: `http://localhost:3000/private/recipes/${title}`,
+      data: {
+        ing: ing,
+        inst: inst
+      }
+    });
+  }
+
+  createRecipe();
 };
 
 const handlePostCancelButtonPress = function() {
