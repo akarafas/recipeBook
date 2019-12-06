@@ -13,6 +13,13 @@
         "fullName": "Amy Deng",
         "email": "amydeng7@live.unc.edu"
       }
+    },
+    "akarafas": {
+      "passwordHash": "$2a$10$QFxTgwiArtTxme8qJhO4P.rl5o1ksBFP/55vaxwWduliksnpMmz4i",
+      "data": {
+        "fullName": "Angel Karafas",
+        "email": "akarafas@live.unc.edu"
+      }
     }
   }
 }
