@@ -8,10 +8,31 @@
 
         <!-- Include links to CSS stylesheets below -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
+        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+
     </head>
 
     <body>
         <div id="root"></div>
+        <script>
+            var L;
+            window.onload = function() {
+              L.mapquest.key = '7jPFJ6XLu4weUKW4DE4hEfan2nBuz4SO';
+              var map = L.mapquest.map('map', {
+                center: [53.480759, -2.242631],
+                layers: L.mapquest.tileLayer('map'),
+                zoom: 12
+              });
+              map.addControl(L.mapquest.control());
+
+
+              
+            }
+        
+        </script>
+        <div id="map"></div>
+
 
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

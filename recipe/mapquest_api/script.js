@@ -33,6 +33,19 @@ const renderPrivateHomePage = function() {
         </div>`
   };
 
+// const mapThis = function () {
+//   let L;
+//   window.onload = function() {
+//     L.mapquest.key = '7jPFJ6XLu4weUKW4DE4hEfan2nBuz4SO';
+//     let map = L.mapquest.map('map', {
+//       center: [53.480759, -2.242631],
+//       layers: L.mapquest.tileLayer('map'),
+//       zoom: 12
+//     });
+
+//   }
+// }
+
 const handleProfileButton = function (event) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -60,6 +73,7 @@ const loadDom = function() {
   
   $(function() {
       async function main() {
+          // mapThis();
           loadDom();
       }
       main();
