@@ -28,7 +28,7 @@ const renderHomePage = function() {
 
     <label class="label">Password</label>
     <div class="control">
-      <input id="password" class="input" type="text" placeholder="Enter password here">
+      <input id="password" class="input" type="password" placeholder="Enter password here">
     </div>
 
     <label class="label">Email</label>
