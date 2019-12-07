@@ -1,43 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
 
-        <title>Recipe Book</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Include links to CSS stylesheets below -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
-        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <title>Recipe Book</title>
 
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"/>
 
-    <body>
-        <div id="root"></div>
-        <script>
-            var L;
-            window.onload = function() {
-              L.mapquest.key = '7jPFJ6XLu4weUKW4DE4hEfan2nBuz4SO';
-              var map = L.mapquest.map('map', {
-                center: [53.480759, -2.242631],
-                layers: L.mapquest.tileLayer('map'),
-                zoom: 12
-              });
-              map.addControl(L.mapquest.control());
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
 
+    <script type="text/javascript">
+      window.onload = function() {
+        let ps = placeSearch({
+          key: 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24',
+          container: document.querySelector('#search-input'),
+          useDeviceLocation: true,
+          collection: [
+            'poi',
+            'airport',
+            'address',
+            'adminArea',
+          ]
+        });
 
-              
-            }
-        
-        </script>
-        <div id="map"></div>
+        L.mapquest.key = '7jPFJ6XLu4weUKW4DE4hEfan2nBuz4SO';
 
+        var map = L.mapquest.map('map', {
+          center: [0, 0],
+          layers: L.mapquest.tileLayer('map'),
+          zoom: 2
+        });
 
-        <!-- Include links to JavaScript files below -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="script.js"></script>
-        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
-    </body>
+        L.mapquest.control().addTo(map);
+
+        let markers = [];
+
+        ps.on('change', (e) => {
+          markers
+            .forEach(function(marker, markerIndex) {
+              if (markerIndex === e.resultIndex) {
+                markers = [marker];
+                marker.setOpacity(1);
+                map.setView(e.result.latlng, 11);
+              } else {
+                removeMarker(marker);
+              }
+            });
+        });
+
+        ps.on('results', (e) => {
+          markers.forEach(removeMarker);
+          markers = [];
+
+          if (e.results.length === 0) {
+            map.setView(new L.LatLng(0, 0), 2);
+            return;
+          }
+
+          e.results.forEach(addMarker);
+          findBestZoom();
+        });
+
+        ps.on('cursorchanged', (e) => {
+          markers
+            .forEach(function(marker, markerIndex) {
+              if (markerIndex === e.resultIndex) {
+                marker.setOpacity(1);
+                marker.setZIndexOffset(1000);
+              } else {
+                marker.setZIndexOffset(0);
+                marker.setOpacity(0.5);
+              }
+            });
+        });
+
+        ps.on('clear', () => {
+          console.log('cleared');
+          map.setView(new L.LatLng(0, 0), 2);
+          markers.forEach(removeMarker);
+        });
+
+        ps.on('error', (e) => {
+          console.log(e);
+        });
+
+        function addMarker(result) {
+          let marker = L.marker(result.latlng, {opacity: .4});
+          marker.addTo(map);
+          markers.push(marker);
+        }
+
+        function removeMarker(marker) {
+          map.removeLayer(marker);
+        }
+
+        function findBestZoom() {
+          let featureGroup = L.featureGroup(markers);
+          map.fitBounds(featureGroup.getBounds().pad(0.5), { animate: false });
+        }
+      }
+    </script>
+  </head>
+
+  <body style="border: 0; margin: 40px;">
+    <div id="root"></div>
+    <div class="container is-fluid">
+        <div class="notification">
+          <h1 class="title is-4">Need ingredients? Search for your favorite store!</h1>
+          <div id="map" style="width: 100%; height: 530px;"></div>
+
+        </div>
+      </div>
+    <input type="search" id="search-input" placeholder="Start Searching..." />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+
 </html>

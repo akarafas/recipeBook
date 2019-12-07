@@ -25,26 +25,9 @@ const renderPrivateHomePage = function() {
               <li id="store_button" class="is-active"><a>Find store</a></li>
             </ul>
           </div>
-        </div>
-        <div class="container is-fluid">
-          <div class="notification">
-            render recipe feed here!!!
-          </div>
         </div>`
   };
 
-// const mapThis = function () {
-//   let L;
-//   window.onload = function() {
-//     L.mapquest.key = '7jPFJ6XLu4weUKW4DE4hEfan2nBuz4SO';
-//     let map = L.mapquest.map('map', {
-//       center: [53.480759, -2.242631],
-//       layers: L.mapquest.tileLayer('map'),
-//       zoom: 12
-//     });
-
-//   }
-// }
 
 const handleProfileButton = function (event) {
     event.preventDefault();
