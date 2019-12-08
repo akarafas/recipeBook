@@ -210,12 +210,6 @@ const loadDom = function() {
       baseURL: "http://localhost:3000/private"
     })
 
-    async function getNumRecipes() {
-      return await priRoot.get('/recipes/', {
-        headers: { Authorization: `Bearer ${jwt}` }
-      });
-    }
-
     async function getRecipes() {
       return await priRoot.get('/recipes', {
         headers: { Authorization: `Bearer ${jwt}` }
@@ -232,11 +226,10 @@ const loadDom = function() {
         x = 10;
       }
 
-      let recipes = await getRecipes();
-      let sortedRecipes = Object.keys(recipes.data.result).sort();
+      let sortedRecipes = Object.keys(info.data.result).sort();
 
       for (let i = x-1; i >=0; i--) {
-        let recipe = recipes.data.result[sortedRecipes[i]];
+        let recipe = info.data.result[sortedRecipes[i]];
         //console.log(recipe.title);
         $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
       }
