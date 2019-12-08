@@ -79,7 +79,7 @@ const loadDom = function() {
         let recipe = info.data.result[sortedRecipes[i]];
         $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
       }
-    })
+    })();
   };
   
   $(function() {
