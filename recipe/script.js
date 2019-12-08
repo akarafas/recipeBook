@@ -2,20 +2,21 @@ const renderHomePage = function() {
     $('#root').on("click", "#login_button", handleLoginButton);
     $('#root').on("click", "#signup_button", handleSignupButton);
     return `<div>
-          <section class="hero is-bold is-dark">
+          <section class="hero is-bold is-warning">
             <div class="hero-body">
+            <img src="http://cocobayresort.com/wp-content/uploads/2018/11/cooking-clipart-cook-dinner-6.png" alt="clipart" width="200" height"200" align="right">
               <div class="container">
-                <h1 class="title">
-                  Recipe Book
+                <h1 class="title has-text-white">
+                  DiscoverCook
                 </h1>
-                <h2 class="subtitle">
-                  COMP426
+                <h2 class="subtitle has-text-white">
+                  Discover new recipes to cook...
                 </h2>
-                <img src="http://cocobayresort.com/wp-content/uploads/2018/11/cooking-clipart-cook-dinner-6.png" alt="clipart" width="200" height"200" align="right">
+                
               </div>
               <div class="section buttons">
-                <button id="login_button" class="button is-link is-light">Login</button>
-                <button id="signup_button" class="button is-link is-light">Sign Up</button>
+                <button id="login_button" class="button is-primary is-light">Login</button>
+                <button id="signup_button" class="button is-primary is-light">Sign Up</button>
               </div>
             </div>
           </section>
