@@ -1,9 +1,12 @@
+
+
 const renderPrivateHomePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
     $('#root').on("click", "#motiv_button", handleMotivButton);
+
     return `<div id="everything">
           <section class="hero is-bold is-dark">
             <div class="hero-body">
@@ -95,31 +98,49 @@ const handleCreateButtonPress = function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
 
-  let title = $('#newRecipe_title').val();
-  let ing = $('#newRecipe_ing').val();
-  let inst = $('#newRecipe_inst').val();
+  let titleR = $('#newRecipe_title').val();
+  let ingR = $('#newRecipe_ing').val();
+  let instR = $('#newRecipe_inst').val();
 
-  async function createRecipe() {
-    await axios({
-      method: 'POST',
-      url: `http://localhost:3000/public/recipes/${title}`,
-      data: {
-        ing: ing,
-        inst: inst
-      }
-    });
-  
-    await axios({
-      method: 'POST',
-      url: `http://localhost:3000/private/recipes/${title}`,
-      data: {
-        ing: ing,
-        inst: inst
-      }
-    });
+  let jwt = localStorage.getItem('jwt');
+
+  const pubRoot = new axios.create({
+    baseURL: "http://localhost:3000/public/recipes"
+  });
+
+  const priRoot = new axios.create({
+    baseURL: "http://localhost:3000/private/recipes"
+  })
+
+  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
+    return await pubRoot.post(`/${titleR}/`, {
+      data: {title, ing, inst}
+    })
   }
 
-  createRecipe();
+  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
+    return await priRoot.post(`/${titleR}/`, {
+      data: {title, ing, inst}
+    }, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    })
+  }
+
+  (async () => {
+    await createRecipePrivate({
+      title: titleR,
+      ing: ingR,
+      inst: instR
+    });
+  })();
+
+  (async () => {
+    await createRecipePublic({
+      title: titleR,
+      ing: ingR,
+      inst: instR
+    });
+  })();
 };
 
 const handlePostCancelButtonPress = function(event) {
