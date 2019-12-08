@@ -8,12 +8,15 @@ const renderPrivateHomePage = function() {
           <section class="hero is-bold is-dark">
             <div class="hero-body">
               <div class="container">
+              <img src="https://imgix.ranker.com/user_node_img/50068/1001343031/original/gon-and-killua-from-hunter-x-hunter-photo-u2?w=650&q=50&fm=pjpg&fit=crop&crop=faces" alt="hxh" width="360" height"360" align="right">
                 <h1 class="title">
                   Recipe Book
                 </h1>
+                
                 <h2 class="subtitle">
                   COMP426
                 </h2>
+                
               </div>
               <div class="section buttons">
                 <button id="profile_button" class="button is-link is-light">View Profile</button>
@@ -61,6 +64,7 @@ const renderCreate = function() {
     <div class="container">
       <h1 class="title">
         Create Your Recipe Post Here:
+        <img src="http://2.bp.blogspot.com/-MNZrXyNxSYA/VCeMrnPOSpI/AAAAAAAAJZg/xbXTnioXqwE/s1600/cookbook-clip.gif" alt="recipegif" width="200" height"200" align="right">
       </h1>
       <div id="newRecipe">
       <h2 class="title is-4">

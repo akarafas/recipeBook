@@ -11,6 +11,7 @@ const renderHomePage = function() {
                 <h2 class="subtitle">
                   COMP426
                 </h2>
+                <img src="http://cocobayresort.com/wp-content/uploads/2018/11/cooking-clipart-cook-dinner-6.png" alt="clipart" width="200" height"200" align="right">
               </div>
               <div class="section buttons">
                 <button id="login_button" class="button is-link is-light">Login</button>
@@ -43,9 +44,6 @@ const handleSignupButton = function (event) {
     event.stopImmediatePropagation();  
     location.href=`../create_account/index.html`;
   };
-
-
-
 
 const loadDom = function() {
     const $root = $('#root');
