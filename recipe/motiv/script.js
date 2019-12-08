@@ -5,6 +5,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#recipes_button", handleRecipesButton);
     $('#root').on("click", "#gen_button", handleGenButton);
+    $('#root').on("click", "#music_button", handleMusicButton);
     return `<div>
           <section class="hero is-bold is-dark">
             <div class="hero-body">
@@ -28,6 +29,7 @@ const renderPrivateHomePage = function() {
               <li id="recipes_button"><a>Recipes</a></li>
               <li id="store_button"><a>Find store</a></li>
               <li id="motiv_button" class="is-active"><a>Need motivation?</a></li>
+              <li id="music_button"><a>Let's listen to some music!</a></li>
             </ul>
           </div>
           <div class="container is-fluid">
@@ -66,6 +68,12 @@ const handleStoreButton = function (event) {
   event.stopImmediatePropagation();  
   location.href=`../../mapquest_api/index.html`;
 };
+
+const handleMusicButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../music/index.html`;
+}
 
 const createPic = function () {
   let arr = [`<img class="place_pic" src="https://cdn.shopify.com/s/files/1/0393/0833/products/4599_2F1461180668_2Fimg_5934_720x.jpeg?v=1461180882" alt="Remmy">`,

@@ -3,6 +3,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#recipes_button", handleRecipesButton);
     $('#root').on("click", "#motiv_button", handleMotiveButton);
+    $('#root').on("click", "#music_button", handleMusicButton);
     return `<div>
           <section class="hero is-bold is-dark">
             <div class="hero-body">
@@ -26,6 +27,7 @@ const renderPrivateHomePage = function() {
               <li id="recipes_button"><a>Recipes</a></li>
               <li id="store_button" class="is-active"><a>Find store</a></li>
               <li id="motiv_button"><a>Need motivation?</a></li>
+              <li id="music_button"><a>Let's listen to some music!</a></li>
             </ul>
           </div>
         </div>`
@@ -57,6 +59,11 @@ const handleLogoutButton = function (event) {
     location.href=`/../motiv/index.html`;
   };
 
+  const handleMusicButton = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    location.href=`../music/index.html`;
+  }
 
 const loadDom = function() {
     const $root = $('#root');
