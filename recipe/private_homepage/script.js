@@ -94,7 +94,7 @@ const renderRecipeCard = function(title, ing, inst, name) {
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p><strong>${title} by ${name}</strong></p>
+          <p><strong>${title}</strong></p>
           <p>Ingredients:</p>
           <p><small>${ing}</small></p>
           <p>Instructions:</p>
@@ -116,17 +116,6 @@ const handleCreateButtonPress = function(event) {
 
   let jwt = localStorage.getItem('jwt');
 
-  async function getUsername() {
-    const result = await axios({
-      method: 'GET',
-      url: 'http://localhost:3000/account/status',
-      headers: {
-        Authorization: `Bearer ${jwt}`
-      }
-    });
-    return result;
-  }
-
   const pubRoot = new axios.create({
     baseURL: "http://localhost:3000/public/recipes"
   });
@@ -135,37 +124,33 @@ const handleCreateButtonPress = function(event) {
     baseURL: "http://localhost:3000/private/recipes"
   })
 
-  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst', name = 'name'}) {
+  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
     return await pubRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst, name}
+      data: {title, ing, inst}
     })
   }
 
-  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst', name = 'name'}) {
+  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
     return await priRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst, name}
+      data: {title, ing, inst}
     }, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
   }
 
   (async () => {
-    let username = await getUsername().name;
     await createRecipePrivate({
       title: titleR,
       ing: ingR,
-      inst: instR,
-      name: username
+      inst: instR
     });
   })();
 
   (async () => {
-    let username = await getUsername().name;
     await createRecipePublic({
       title: titleR,
       ing: ingR,
-      inst: instR,
-      name: username
+      inst: instR
     });
   })();
 
@@ -245,8 +230,8 @@ const loadDom = function() {
 
       for (let i = x-1; i >=0; i--) {
         let recipe = info.data.result[sortedRecipes[i]];
-        //console.log(recipe.title);
-        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst, recipe.name));
+        //console.log(recipe.name);
+        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
       }
     })();
   };
