@@ -89,12 +89,12 @@ const renderCreate = function() {
 };
 
 // create each recipe card here
-const renderRecipeCard = function(title, ing, inst) {
+const renderRecipeCard = function(title, ing, inst, name) {
   return `<div class="box">
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p><strong>${title}</strong></p>
+          <p><strong>${title} by ${name}</strong></p>
           <p>Ingredients:</p>
           <p><small>${ing}</small></p>
           <p>Instructions:</p>
@@ -116,6 +116,17 @@ const handleCreateButtonPress = function(event) {
 
   let jwt = localStorage.getItem('jwt');
 
+  async function getUsername() {
+    const result = await axios({
+      method: 'GET',
+      url: 'http://localhost:3000/account/status',
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
+    return result;
+  }
+
   const pubRoot = new axios.create({
     baseURL: "http://localhost:3000/public/recipes"
   });
@@ -124,33 +135,37 @@ const handleCreateButtonPress = function(event) {
     baseURL: "http://localhost:3000/private/recipes"
   })
 
-  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
+  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst', name = 'name'}) {
     return await pubRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst}
+      data: {title, ing, inst, name}
     })
   }
 
-  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
+  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst', name = 'name'}) {
     return await priRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst}
+      data: {title, ing, inst, name}
     }, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
   }
 
   (async () => {
+    let username = await getUsername().name;
     await createRecipePrivate({
       title: titleR,
       ing: ingR,
-      inst: instR
+      inst: instR,
+      name: username
     });
   })();
 
   (async () => {
+    let username = await getUsername().name;
     await createRecipePublic({
       title: titleR,
       ing: ingR,
-      inst: instR
+      inst: instR,
+      name: username
     });
   })();
 
@@ -231,7 +246,7 @@ const loadDom = function() {
       for (let i = x-1; i >=0; i--) {
         let recipe = info.data.result[sortedRecipes[i]];
         //console.log(recipe.title);
-        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
+        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst, recipe.name));
       }
     })();
   };
