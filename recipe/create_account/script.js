@@ -91,7 +91,7 @@ const renderHomePage = function() {
         }
       });
   
-      localStorage.setItem('jwt', result.jwt);
+      localStorage.setItem('jwt', result.data.jwt);
     }
 
     createAccount();
