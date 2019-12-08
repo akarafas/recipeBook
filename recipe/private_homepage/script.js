@@ -3,6 +3,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
+    $('#root').on("click", "#motiv_button", handleMotivButton);
     return `<div id="everything">
           <section class="hero is-bold is-dark">
             <div class="hero-body">
@@ -39,6 +40,7 @@ const renderPrivateHomePage = function() {
             <ul>
               <li class="is-active"><a>Recipes</a></li>
               <li id="store_button"><a>Find store</a></li>
+              <li id="motiv_button"><a>Need motivation?</a></li>
             </ul>
           </div>
         
@@ -116,13 +118,13 @@ const handleCreateButtonPress = function(event) {
   createRecipe();
 };
 
-const handlePostCancelButtonPress = function() {
+const handlePostCancelButtonPress = function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $('#everything').replaceWith(renderPrivateHomePage());
 };
 
-const handlePostButtonPress = function() {
+const handlePostButtonPress = function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $('#postTweet').replaceWith(renderCreate());
@@ -134,6 +136,12 @@ const handleProfileButton = function (event) {
     location.href=`../user_profile/index.html`;
 
 };
+
+const handleMotivButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../motiv/index.html`;
+}
 
 const handleLogoutButton = function (event) {
     event.preventDefault();

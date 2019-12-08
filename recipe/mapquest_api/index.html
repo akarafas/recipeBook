@@ -107,17 +107,17 @@
     </script>
   </head>
 
-  <body style="border: 0; margin: 40px;">
+  <body>
     <div id="root"></div>
     <div class="container is-fluid">
         <div class="notification">
           <h1 class="title is-4">Need ingredients? Search for your favorite store!</h1>
           <div id="map" style="width: 100%; height: 530px;"></div>
-
         </div>
       </div>
-    <input type="search" id="search-input" placeholder="Start Searching..." />
+    <input class="input" type="search" id="search-input" placeholder="Start Searching..." />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
     <script src="script.js"></script>
   </body>
 
