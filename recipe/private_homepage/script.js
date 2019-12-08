@@ -6,6 +6,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
     $('#root').on("click", "#motiv_button", handleMotivButton);
+    $('#root').on("click", "#music_button", handleMusicButton);
 
     return `<div id="everything">
           <section class="hero is-bold is-dark">
@@ -47,15 +48,9 @@ const renderPrivateHomePage = function() {
               <li class="is-active"><a>Recipes</a></li>
               <li id="store_button"><a>Find store</a></li>
               <li id="motiv_button"><a>Need motivation?</a></li>
+              <li id="music_button"><a>Let's listen to some music!</a></li>
             </ul>
-          </div>
-        
-        <div class="container is-fluid">
-          <div class="notification">
-            render recipe feed here!!!
-          </div>
-        </div>
-        </div>`
+          </div>`
   };
 
   // create tweets in textarea
@@ -95,7 +90,19 @@ const renderCreate = function() {
 
 // create each recipe card here
 const renderRecipeCard = function(title, ing, inst) {
-
+  return `<div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p><strong>${title}</strong></p>
+          <p>Ingredients:</p>
+          <p><small>${ing}</small></p>
+          <p>Instructions:</p>
+          <p><small>${inst}</small></p>
+        </div>
+      </div>
+    </article>
+  </div>`
 }
 
 // create tweet button press
@@ -117,15 +124,15 @@ const handleCreateButtonPress = function(event) {
     baseURL: "http://localhost:3000/private/recipes"
   })
 
-  async function createRecipePublic({ing = 'ing', inst = 'inst'}) {
+  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
     return await pubRoot.post(`/${titleR}/`, {
-      data: {ing, inst}
+      data: {title, ing, inst}
     })
   }
 
-  async function createRecipePrivate({ing = 'ing', inst = 'inst'}) {
+  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
     return await priRoot.post(`/${titleR}/`, {
-      data: {ing, inst}
+      data: {title, ing, inst}
     }, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
@@ -133,6 +140,7 @@ const handleCreateButtonPress = function(event) {
 
   (async () => {
     await createRecipePrivate({
+      title: titleR,
       ing: ingR,
       inst: instR
     });
@@ -140,10 +148,13 @@ const handleCreateButtonPress = function(event) {
 
   (async () => {
     await createRecipePublic({
+      title: titleR,
       ing: ingR,
       inst: instR
     });
   })();
+
+  location.reload();
 };
 
 const handlePostCancelButtonPress = function(event) {
@@ -183,6 +194,11 @@ const handleLogoutButton = function (event) {
     location.href=`../mapquest_api/index.html`;
   };
 
+  const handleMusicButton = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();  
+    location.href=`../music/index.html`;
+  };
 
 const loadDom = function() {
     const $root = $('#root');
@@ -207,19 +223,22 @@ const loadDom = function() {
     }
 
     (async () => {
-      let {info} = await getNumRecipes();
+      let info = await getRecipes();
       let x;
 
-      if (info.data.length < 10) {
-        x = data.length;
+      if (Object.keys(info.data.result).length < 10) {
+        x = Object.keys(info.data.result).length;
       } else {
         x = 10;
       }
 
-      let {recipes} = await getRecipes();
+      let recipes = await getRecipes();
+      let sortedRecipes = Object.keys(recipes.data.result).sort();
 
-      for (let i = recipes.data.length-1; i >=0; i--) {
-        $root.append(renderRecipeCard(recipes.data.title, recipes.data.title.ing, recipes.data.title.inst));
+      for (let i = x-1; i >=0; i--) {
+        let recipe = recipes.data.result[sortedRecipes[i]];
+        //console.log(recipe.title);
+        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
       }
     })();
   };
