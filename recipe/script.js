@@ -1,8 +1,7 @@
 const renderHomePage = function() {
     $('#root').on("click", "#login_button", handleLoginButton);
     $('#root').on("click", "#signup_button", handleSignupButton);
-    return `<div>
-          <section class="hero is-bold is-warning">
+    return `<section class="hero is-bold is-warning">
             <div class="hero-body">
             <img src="http://cocobayresort.com/wp-content/uploads/2018/11/cooking-clipart-cook-dinner-6.png" alt="clipart" width="200" height"200" align="right">
               <div class="container">
@@ -17,6 +16,15 @@ const renderHomePage = function() {
               <div class="section buttons">
                 <button id="login_button" class="button is-primary is-light">Login</button>
                 <button id="signup_button" class="button is-primary is-light">Sign Up</button>
+              </div>
+            </div>
+          </section>
+          <section class="hero is-dark">
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title">
+                  Recipes
+                </h1>
               </div>
             </div>
           </section>`
