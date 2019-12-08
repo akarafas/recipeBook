@@ -188,16 +188,22 @@ const loadDom = function() {
     const $root = $('#root');
     $root.append(renderPrivateHomePage());
 
+    let jwt = localStorage.getItem('jwt');
+
     const priRoot = new axios.create({
       baseURL: "http://localhost:3000/private"
     })
 
     async function getNumRecipes() {
-      return await priRoot.get('/recipes/');
+      return await priRoot.get('/recipes/', {
+        headers: { Authorization: `Bearer ${jwt}` }
+      });
     }
 
     async function getRecipes() {
-      return await priRoot.get('/recipes');
+      return await priRoot.get('/recipes', {
+        headers: { Authorization: `Bearer ${jwt}` }
+      });
     }
 
     (async () => {
