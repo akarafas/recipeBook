@@ -94,7 +94,7 @@ const renderCreate = function() {
 };
 
 // create each recipe card here
-const renderRecipeCard = function(recipe) {
+const renderRecipeCard = function(title, ing, inst) {
 
 }
 
@@ -117,15 +117,15 @@ const handleCreateButtonPress = function(event) {
     baseURL: "http://localhost:3000/private/recipes"
   })
 
-  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
+  async function createRecipePublic({ing = 'ing', inst = 'inst'}) {
     return await pubRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst}
+      data: {ing, inst}
     })
   }
 
-  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
+  async function createRecipePrivate({ing = 'ing', inst = 'inst'}) {
     return await priRoot.post(`/${titleR}/`, {
-      data: {title, ing, inst}
+      data: {ing, inst}
     }, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
@@ -133,7 +133,6 @@ const handleCreateButtonPress = function(event) {
 
   (async () => {
     await createRecipePrivate({
-      title: titleR,
       ing: ingR,
       inst: instR
     });
@@ -141,7 +140,6 @@ const handleCreateButtonPress = function(event) {
 
   (async () => {
     await createRecipePublic({
-      title: titleR,
       ing: ingR,
       inst: instR
     });
@@ -198,10 +196,12 @@ const loadDom = function() {
       return await priRoot.get('/recipes/');
     }
 
-    async function
+    async function getRecipes() {
+      return await priRoot.get('/recipes');
+    }
 
     (async () => {
-      let {info} = await getRecipes();
+      let {info} = await getNumRecipes();
       let x;
 
       if (info.data.length < 10) {
@@ -210,7 +210,11 @@ const loadDom = function() {
         x = 10;
       }
 
-      
+      let {recipes} = await getRecipes();
+
+      for (let i = recipes.data.length-1; i >=0; i--) {
+        $root.append(renderRecipeCard(recipes.data.title, recipes.data.title.ing, recipes.data.title.inst));
+      }
     })();
   };
   
