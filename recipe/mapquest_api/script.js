@@ -7,6 +7,7 @@ const renderPrivateHomePage = function() {
           <section class="hero is-bold is-dark">
             <div class="hero-body">
               <div class="container">
+              <img src="https://media2.giphy.com/media/3o72FiGvRpncRVKbbG/source.gif" alt="cutefood" width="200" height"200" align="right">
                 <h1 class="title">
                   Recipe Book
                 </h1>
