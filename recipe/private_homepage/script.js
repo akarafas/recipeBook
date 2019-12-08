@@ -93,6 +93,11 @@ const renderCreate = function() {
   </section>`
 };
 
+// create each recipe card here
+const renderRecipeCard = function(recipe) {
+
+}
+
 // create tweet button press
 const handleCreateButtonPress = function(event) {
   event.preventDefault();
@@ -184,6 +189,29 @@ const handleLogoutButton = function (event) {
 const loadDom = function() {
     const $root = $('#root');
     $root.append(renderPrivateHomePage());
+
+    const priRoot = new axios.create({
+      baseURL: "http://localhost:3000/private"
+    })
+
+    async function getNumRecipes() {
+      return await priRoot.get('/recipes/');
+    }
+
+    async function
+
+    (async () => {
+      let {info} = await getRecipes();
+      let x;
+
+      if (info.data.length < 10) {
+        x = data.length;
+      } else {
+        x = 10;
+      }
+
+      
+    })();
   };
   
   $(function() {
