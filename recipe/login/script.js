@@ -59,7 +59,7 @@ const handleSubmitButton = function (event) {
         }
       });
   
-      localStorage.setItem('jwt', result.jwt);
+      localStorage.setItem('jwt', result.data.jwt);
       location.href=`../private_homepage/index.html`;
     }
     catch(error) {

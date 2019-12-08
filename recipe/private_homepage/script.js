@@ -1,19 +1,25 @@
+
+
 const renderPrivateHomePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
     $('#root').on("click", "#motiv_button", handleMotivButton);
+
     return `<div id="everything">
           <section class="hero is-bold is-dark">
             <div class="hero-body">
               <div class="container">
+              <img src="https://imgix.ranker.com/user_node_img/50068/1001343031/original/gon-and-killua-from-hunter-x-hunter-photo-u2?w=650&q=50&fm=pjpg&fit=crop&crop=faces" alt="hxh" width="360" height"360" align="right">
                 <h1 class="title">
                   Recipe Book
                 </h1>
+                
                 <h2 class="subtitle">
                   COMP426
                 </h2>
+                
               </div>
               <div class="section buttons">
                 <button id="profile_button" class="button is-link is-light">View Profile</button>
@@ -61,6 +67,7 @@ const renderCreate = function() {
     <div class="container">
       <h1 class="title">
         Create Your Recipe Post Here:
+        <img src="http://2.bp.blogspot.com/-MNZrXyNxSYA/VCeMrnPOSpI/AAAAAAAAJZg/xbXTnioXqwE/s1600/cookbook-clip.gif" alt="recipegif" width="200" height"200" align="right">
       </h1>
       <div id="newRecipe">
       <h2 class="title is-4">
@@ -91,31 +98,49 @@ const handleCreateButtonPress = function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
 
-  let title = $('#newRecipe_title').val();
-  let ing = $('#newRecipe_ing').val();
-  let inst = $('#newRecipe_inst').val();
+  let titleR = $('#newRecipe_title').val();
+  let ingR = $('#newRecipe_ing').val();
+  let instR = $('#newRecipe_inst').val();
 
-  async function createRecipe() {
-    await axios({
-      method: 'POST',
-      url: `http://localhost:3000/public/recipes/${title}`,
-      data: {
-        ing: ing,
-        inst: inst
-      }
-    });
-  
-    await axios({
-      method: 'POST',
-      url: `http://localhost:3000/private/recipes/${title}`,
-      data: {
-        ing: ing,
-        inst: inst
-      }
-    });
+  let jwt = localStorage.getItem('jwt');
+
+  const pubRoot = new axios.create({
+    baseURL: "http://localhost:3000/public/recipes"
+  });
+
+  const priRoot = new axios.create({
+    baseURL: "http://localhost:3000/private/recipes"
+  })
+
+  async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
+    return await pubRoot.post(`/${titleR}/`, {
+      data: {title, ing, inst}
+    })
   }
 
-  createRecipe();
+  async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
+    return await priRoot.post(`/${titleR}/`, {
+      data: {title, ing, inst}
+    }, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    })
+  }
+
+  (async () => {
+    await createRecipePrivate({
+      title: titleR,
+      ing: ingR,
+      inst: instR
+    });
+  })();
+
+  (async () => {
+    await createRecipePublic({
+      title: titleR,
+      ing: ingR,
+      inst: instR
+    });
+  })();
 };
 
 const handlePostCancelButtonPress = function(event) {
