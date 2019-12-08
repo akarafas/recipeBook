@@ -19,19 +19,24 @@ const renderHomePage = function() {
                 <button id="signup_button" class="button is-primary is-light">Sign Up</button>
               </div>
             </div>
-          </section>
-          <div class="tabs is-medium">
-            <ul>
-              <li class="is-active"><a>Recipes</a></li>
-            </ul>
-          </div>
+          </section>`
+};
+
+const renderRecipeCard = function(title, ing, inst) {
+  return `<div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p><strong>${title}</strong></p>
+          <p>Ingredients:</p>
+          <p><small>${ing}</small></p>
+          <p>Instructions:</p>
+          <p><small>${inst}</small></p>
         </div>
-        <div class="container is-fluid">
-          <div class="notification">
-            render recipe feed here!!!
-          </div>
-        </div>`
-  };
+      </div>
+    </article>
+  </div>`
+}
 
 const handleLoginButton = function (event) {
     event.preventDefault();
@@ -49,6 +54,32 @@ const handleSignupButton = function (event) {
 const loadDom = function() {
     const $root = $('#root');
     $root.append(renderHomePage());
+
+    const pubRoot = new axios.create({
+      baseURL: "http://localhost:3000/public"
+    })
+
+    async function getRecipes() {
+      return await pubRoot.get('/recipes');
+    }
+
+    (async () => {
+      let info = await getRecipes();
+      let x;
+
+      if (Object.keys(info.data.result).length < 10) {
+        x = Object.keys(info.data.result).length;
+      } else {
+        x = 10;
+      }
+
+      let sortedRecipes = Object.keys(info.data.result).sort();
+
+      for (let i = x-1; i >= 0; i--) {
+        let recipe = info.data.result[sortedRecipes[i]];
+        $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
+      }
+    })
   };
   
   $(function() {
