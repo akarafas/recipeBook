@@ -1,17 +1,21 @@
 const renderHomePage = function() {
     $('#root').on("click", "#login_button", handleLoginButton);
     $('#root').on("click", "#signup_button", handleSignupButton);
-    return `<section class="hero is-bold is-warning">
+    return `<section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
             <img src="http://cocobayresort.com/wp-content/uploads/2018/11/cooking-clipart-cook-dinner-6.png" alt="clipart" width="200" height"200" align="right">
               <div class="container">
-                <h1 class="title has-text-white">
+                <h1 class="elegant">
                   DiscoverCook
                 </h1>
-                <h2 class="subtitle has-text-white">
+                <br>
+                <br>
+                <h2 class="subtitle_stuff">
                   Discover new recipes to cook...
                 </h2>
-                
               </div>
               <div class="section buttons">
                 <button id="login_button" class="button is-primary is-light">Login</button>
