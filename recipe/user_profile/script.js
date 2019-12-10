@@ -22,18 +22,53 @@ const renderUserProfile = function() {
             </div>
           </section>
         </div>
-        <div class="container is-fluid">
-          <div class="notification">
-            <h1 class="title is-4">Name</h1>
-            <h1 class="title is-4">Username</h1>
-            <h1 class="title is-4">Email</h1>
-            <h1 class="title is-4">Bio</h1>
-            <h1 class="title is-4">Birthday</h1>
-            <h1 class="title is-4">Favorite Recipe</h1>
-            <h1 class="title is-4">Favorite Cooking Song</h1>
-
+        <section class="hero is-primary is-small">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title is-4">Name</h1>
+                <div class="container is-fluid">
+                  <div class="notification has-text-dark">    
+                  </div>
+                </div>
+              <h1 class="title is-4">Username</h1>
+                <div class="container is-fluid">
+                  <div class="notification has-text-dark">
+                  </div>
+                </div>
+              <h1 class="title is-4">Email</h1>
+                <div class="container is-fluid">
+                  <div class="notification has-text-dark">
+                  </div>
+                </div>
+            </div>
           </div>
-        </div>
+        </section>
+        <section class="hero is-link is-small">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-4">Bio</h1>
+              <div class="container is-fluid">
+                <div class="notification has-text-dark">    
+                </div>
+              </div>
+            <h1 class="title is-4">Birthday</h1>
+              <div class="container is-fluid">
+                <div class="notification has-text-dark">
+                </div>
+              </div>
+            <h1 class="title is-4">Favorite Recipe</h1>
+              <div class="container is-fluid">
+                <div class="notification has-text-dark">
+                </div>
+              </div>
+            <h1 class="title is-4">Favorite Cooking Song</h1>
+              <div class="container is-fluid">
+                <div class="notification has-text-dark">
+                </div>
+              </div>
+          </div>
+          </div>
+      </section>
         </div>`
   };
 
@@ -60,16 +95,28 @@ const renderUserProfile = function() {
             </div>
           </section>
         </div>
-        <div class="container is-fluid">
-          <div class="notification">
-            <h1 class="title is-4">Name</h1>
-            <h1 class="title is-4">Username</h1>
-            <h1 class="title is-4">Email</h1>
+        <section class="hero is-link is-small">
+        <div class="hero-body">
+          <div class="container">
             <h1 class="title is-4">Bio</h1>
+              <div class="control">
+                <input class="input is-focused" type="text" placeholder="Focused input">
+              </div>
             <h1 class="title is-4">Birthday</h1>
+              <div class="control">
+                <input class="input is-focused" type="text" placeholder="Focused input">
+              </div>
             <h1 class="title is-4">Favorite Recipe</h1>
+              <div class="control">
+                <input class="input is-focused" type="text" placeholder="Focused input">
+              </div>
             <h1 class="title is-4">Favorite Cooking Song</h1>
+              <div class="control">
+                <input class="input is-focused" type="text" placeholder="Focused input">
+              </div>
           </div>
+          </div>
+      </section>
         </div>
         </div>
         </div>`
