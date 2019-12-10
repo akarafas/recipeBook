@@ -7,6 +7,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
     $('#root').on("click", "#motiv_button", handleMotivButton);
     $('#root').on("click", "#music_button", handleMusicButton);
+    $('#root').on("click", "#search_button", handleSearchButton);
 
     return `<div id="everything">
           <section class="hero is-bold is-dark">
