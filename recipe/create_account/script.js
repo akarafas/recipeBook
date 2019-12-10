@@ -3,16 +3,16 @@ const renderHomePage = function() {
     $('#root').on("click", "#back_button", handleBackButtonPress);
     $('#root').on("click", "#submit_button", handleSubmitButtonPress);
     return `<div>
-    <section class="hero is-white">
-        <div class="container">
-        </div>
-        <div class="section buttons">
-        </div>
+    <section class="hero">
+      <div class="container">
+      </div>
+      <div class="section buttons">
+      </div>
     </section>
     
   </div>
     <div class="container is-fluid">
-    <div class="notification"><div>
+    <div class="notification is-warning"><div>
     <div class="field">
     <h1 class="title is-2"> Create Account</h1>
 
@@ -49,7 +49,15 @@ const renderHomePage = function() {
     </div>
     </div>
     </div>
-    </div>`
+    </div>
+    <section class="hero">
+            <div class="container">
+            </div>
+            <div class="section buttons">
+            </div>
+        </section>`
+
+
   };
   
   const handleBackButtonPress = function (event) {
