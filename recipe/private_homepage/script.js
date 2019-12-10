@@ -119,26 +119,38 @@ const handleCreateButtonPress = function(event) {
   let jwt = localStorage.getItem('jwt');
 
   const pubRoot = new axios.create({
-    baseURL: "http://localhost:3000/public/recipes"
+    baseURL: "http://localhost:3000/public"
   });
 
   const priRoot = new axios.create({
-    baseURL: "http://localhost:3000/private/recipes"
-  })
+    baseURL: "http://localhost:3000/private"
+  });
+
+  /*const userRoot = new axios.create({
+    baseURL: "http://localhost:3000/user"
+  });*/
 
   async function createRecipePublic({title = 'title', ing = 'ing', inst = 'inst'}) {
-    return await pubRoot.post(`/${titleR}/`, {
+    return await pubRoot.post(`/recipes/${titleR}/`, {
       data: {title, ing, inst}
     })
   }
 
   async function createRecipePrivate({title = 'title', ing = 'ing', inst = 'inst'}) {
-    return await priRoot.post(`/${titleR}/`, {
+    return await priRoot.post(`/recipes/${titleR}/`, {
       data: {title, ing, inst}
     }, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
   }
+
+  /*async function createRecipeUser({title = 'title', ing = 'ing', inst = 'inst'}) {
+    return await userRoot.post(`/recipes/${titleR}/`, {
+      data: {title, ing, inst}
+    }, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    })
+  }*/
 
   (async () => {
     await createRecipePrivate({
@@ -155,6 +167,14 @@ const handleCreateButtonPress = function(event) {
       inst: instR
     });
   })();
+
+  /*(async () => {
+    await createRecipeUser({
+      title: titleR,
+      ing: ingR,
+      inst: instR
+    });
+  })();*/
 
   location.reload();
 };
