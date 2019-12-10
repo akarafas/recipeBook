@@ -46,6 +46,7 @@ const renderPrivateHomePage = function() {
           <div class="tabs is-medium">
             <ul>
               <li class="is-active"><a>Recipes</a></li>
+              <li id="search_button"><a>Search</a></li>
               <li id="store_button"><a>Find store</a></li>
               <li id="motiv_button"><a>Need motivation?</a></li>
               <li id="music_button"><a>Let's listen to some music!</a></li>
@@ -187,6 +188,12 @@ const handleLogoutButton = function (event) {
     event.stopImmediatePropagation();  
     location.href=`../index.html`;
   };
+
+const handleSearchButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../privateSearch/index.html`;
+}
 
   const handleStoreButton = function (event) {
     event.preventDefault();
