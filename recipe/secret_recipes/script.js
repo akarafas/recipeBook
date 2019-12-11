@@ -82,6 +82,7 @@ const renderCreate = function() {
   
   const renderRecipeCard = function(title, ing, inst) {
     $('#root').on("click", "#delete_button", handleDeleteButton);
+    $('#root').on("click", "#edit_button", handleEditButton);
     return `<div id="delete_card" class="box">
       <article class="media">
         <div class="media-content">
@@ -94,10 +95,51 @@ const renderCreate = function() {
           </div>
         </div>
         <div id="${title}">
+        <button type="button" class="button is-warning" id="edit_button">Edit</button>
         <button type="button" class="button is-danger" id="delete_button">Delete</button>
         </div>
       </article>
     </div>`
+  };
+
+  const renderEditForm = function(title, ing, inst) {
+    $('#root').on("click", "#editCancel_button", handleCancelEditButton);
+    $('#root').on("click", "#saveEdit_button", handleSaveEditButtonPress);
+    return `<section class="hero is-warning" id="create">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Edit Your Recipe Post Here:
+          <img src="http://2.bp.blogspot.com/-MNZrXyNxSYA/VCeMrnPOSpI/AAAAAAAAJZg/xbXTnioXqwE/s1600/cookbook-clip.gif" alt="recipegif" width="200" height"200" align="right">
+        </h1>
+        <div id="newRecipe">
+        <h2 class="title is-4">
+        Title:
+        </h2>
+        <div class="container is-fluid">
+          <div class="notification has-text-dark">
+            ${title}
+          </div>
+        </div>
+        <br>
+        <h2 class="title is-4">
+        Ingredients:
+        </h2>
+        <div><textarea id="editRecipe_ing" class="textarea">${ing}</textarea></div>
+        <br>
+        <h3 class="title is-4">
+        Procedure:
+        </h3>
+        <div><textarea id="editRecipe_inst" class="textarea">${inst}</textarea></div>
+        <br>
+        <div id="${title}">
+        <button type="button" class="button is-primary" id="saveEdit_button">Save!</button>
+        <button type="button" class="button is-dark" id="editCancel_button">Cancel</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    </section>`
   };
 
 const handleDeleteButton = function(event) {
@@ -123,6 +165,29 @@ const handleDeleteButton = function(event) {
   
   
     location.reload();
+}
+
+const handleEditButton = function(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  let jwt = localStorage.getItem('jwt');
+
+  const userRoot = new axios.create({
+    baseURL: "http://localhost:3000/user"
+  })
+
+  async function getRecipe() {
+    return await userRoot.get(`/recipes/${event.target.parentElement.id}`, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    });
+  }
+  
+  (async () => {
+    let info = await getRecipe();
+    let recipe = info.data.result;
+    $('#delete_card').replaceWith(renderEditForm(recipe.title, recipe.ing, recipe.inst));
+  })();
 }
 
 const handlePostButtonPress = function(event) {
@@ -164,6 +229,40 @@ const handlePostButtonPress = function(event) {
   
     location.reload();
   };
+
+  const handleSaveEditButtonPress = function(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  
+    let ingR = $('#editRecipe_ing').val();
+    let instR = $('#editRecipe_inst').val();
+
+  
+    let jwt = localStorage.getItem('jwt');
+
+    const userRoot = new axios.create({
+      baseURL: "http://localhost:3000/user"
+    });
+  
+    async function createRecipeUser({title = 'title', ing = 'ing', inst = 'inst'}) {
+      return await userRoot.post(`/recipes/${event.target.parentElement.id}/`, {
+        data: {title, ing, inst}
+      }, {
+        headers: { Authorization: `Bearer ${jwt}` }
+      })
+    }
+  
+    (async () => {
+      await createRecipeUser({
+        title: event.target.parentElement.id,
+        ing: ingR,
+        inst: instR
+      });
+    })();
+  
+  
+    location.reload();
+  };
   
   const handlePostCancelButtonPress = function(event) {
     event.preventDefault();
@@ -188,6 +287,12 @@ const handleHomeButton = function (event) {
     event.stopImmediatePropagation();
     location.href=`../user_profile/index.html`;
   };
+
+  const handleCancelEditButton = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    location.reload();
+  }
   
 
 
