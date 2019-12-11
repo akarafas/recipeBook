@@ -1,5 +1,3 @@
-
-
 const renderPrivateHomePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
@@ -10,16 +8,19 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#search_button", handleSearchButton);
 
     return `<div id="everything">
-          <section class="hero is-bold is-dark">
+          <section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
               <div class="container">
               <img src="https://imgix.ranker.com/user_node_img/50068/1001343031/original/gon-and-killua-from-hunter-x-hunter-photo-u2?w=650&q=50&fm=pjpg&fit=crop&crop=faces" alt="hxh" width="360" height"360" align="right">
                 <h1 class="title">
-                  Recipe Book
+                  Recipe Book Homepage
                 </h1>
                 
                 <h2 class="subtitle">
-                  COMP426
+                  A place to show off your creativity and love for food!
                 </h2>
                 
               </div>
@@ -30,7 +31,7 @@ const renderPrivateHomePage = function() {
             </div>
           </section>
 
-          <section class="hero is-warning" id="postTweet">
+          <section class="hero is-dark" id="postTweet">
           <div class="hero-body">
           <div class="container">
           <h1 class="title">
@@ -38,21 +39,24 @@ const renderPrivateHomePage = function() {
           </h1>
           <h2 class="subtitle">
           <br>
-          <button type="button" class="button is-dark level-item" id="postTweet_button">Post!</button>
+          <button type="button" class="button is-light level-item" id="postTweet_button">Post!</button>
           </h2>
           </div>
           </div>
           </section>
-
-          <div class="tabs is-medium">
-            <ul>
-              <li class="is-active"><a>Recipes</a></li>
-              <li id="search_button"><a>Search</a></li>
-              <li id="store_button"><a>Find store</a></li>
-              <li id="motiv_button"><a>Need motivation?</a></li>
-              <li id="music_button"><a>Let's listen to some music!</a></li>
+          <header class="header sticky sticky--top js-header">
+          <div class="grid">
+          <nav class="navigation">
+            <ul class="navigation__list navigation__list--inline">
+              <li class="navigation__item" id="recipes_button"><a href="#" class="is-active">Recipes</a></li>
+              <li class="navigation__item" id="search_button"><a href="#">Search</a></li>
+              <li class="navigation__item" id="store_button"><a href="#">Find store</a></li>
+              <li class="navigation__item" id="motiv_button"><a href="#">Need motivation?</a></li>
+              <li class="navigation__item" id="music_button"><a href="#">Let's listen to some music!</a></li>
             </ul>
-          </div>`
+          </nav>
+          </div>
+          </header>`
   };
 
   // create tweets in textarea

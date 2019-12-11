@@ -7,15 +7,18 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#gen_button", handleGenButton);
     $('#root').on("click", "#music_button", handleMusicButton);
     return `<div>
-          <section class="hero is-bold is-dark">
+          <section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
               <div class="container">
-              <img src="https://thumbs.gfycat.com/ExcellentFarBuffalo-small.gif" alt="motive" width="360" height"360" align="right">
+              <img src="https://thumbs.gfycat.com/ExcellentFarBuffalo-small.gif" alt="motive" width="300" height"300" align="right">
                 <h1 class="title">
-                  Recipe Book
+                  Feeling Down? Generate Some Motivation!
                 </h1>
                 <h2 class="subtitle">
-                  COMP426
+                  Cooking is not easy, but we are here to help!
                 </h2>
               </div>
               <div class="section buttons">
@@ -24,14 +27,19 @@ const renderPrivateHomePage = function() {
               </div>
             </div>
           </section>
-          <div class="tabs is-medium">
-            <ul>
-              <li id="recipes_button"><a>Recipes</a></li>
-              <li id="store_button"><a>Find store</a></li>
-              <li id="motiv_button" class="is-active"><a>Need motivation?</a></li>
-              <li id="music_button"><a>Let's listen to some music!</a></li>
+          <header class="header sticky sticky--top js-header">
+          <div class="grid">
+          <nav class="navigation">
+            <ul class="navigation__list navigation__list--inline">
+              <li class="navigation__item" id="recipes_button"><a href="#">Recipes</a></li>
+              <li class="navigation__item" id="search_button"><a href="#">Search</a></li>
+              <li class="navigation__item" id="store_button"><a href="#">Find store</a></li>
+              <li class="navigation__item" id="motiv_button"><a href="#" class="is-active">Need motivation?</a></li>
+              <li class="navigation__item" id="music_button"><a href="#">Let's listen to some music!</a></li>
             </ul>
+          </nav>
           </div>
+          </header>
           <div class="container is-fluid">
           <div class="notification">
             <h1 class="title is-4">Press the button to get motivation!</h1>
