@@ -20,6 +20,34 @@
         "fullName": "Angel Karafas",
         "email": "akarafas@live.unc.edu"
       }
+    },
+    "emily": {
+      "passwordHash": "$2a$10$i.4nc2NdPznZTsFkQJ3bt.drMPF0txZpSW7SXDuk1YyNMhNjW/d.y",
+      "data": {
+        "fullName": "emily",
+        "email": "emily"
+      }
+    },
+    "emilys": {
+      "passwordHash": "$2a$10$lDQux7TEPobCj4uSKcnrIOF73cdDrbRj/Oq1vxxQOKdYYmjy44qHm",
+      "data": {
+        "fullName": "emilyS",
+        "email": "emilyS"
+      }
+    },
+    "es": {
+      "passwordHash": "$2a$10$MrYbPCDCpaJADG9meZAmHeqTZqrc4mKZq2l.7i/6e5dcuhjHTddpu",
+      "data": {
+        "fullName": "es",
+        "email": "es"
+      }
+    },
+    "a": {
+      "passwordHash": "$2a$10$oFOBOemTEIpdCluIxuHbweslXCN6h0tDxvZxyBXUyHUyKpbrTteYa",
+      "data": {
+        "fullName": "a",
+        "email": "a"
+      }
     }
   }
 }
