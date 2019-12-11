@@ -1,5 +1,6 @@
 const renderUserProfile = function() {
     $('#root').on("click", "#home_button", handleHomeButton);
+    $('#root').on("click", "#secret_button", handelSecretButton);
     $('#root').on("click", "#edit_button", handleEditButtonPress);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     return `<div id="userProf">
@@ -16,6 +17,7 @@ const renderUserProfile = function() {
               </div>
               <div class="section buttons">
                 <button id="home_button" class="button is-primary is-light">Home</button>
+                <button id="secret_button" class="button is-warning is-light">Secret Recipes</button>
                 <button id="edit_button" class="button is-link is-light">Edit Profile</button>
                 <button id="logout_button" class="button is-danger is-light">Logout</button>
               </div>
@@ -128,6 +130,12 @@ const handleEditButtonPress = function (event) {
     $(event.target.closest('#userProf')).replaceWith(renderEditProfile());
 };
 
+const handelSecretButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../secret_recipes/index.html`;
+};
+
 const handleHomeButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -150,6 +158,31 @@ const handleCancelButton = function (event) {
 const handleSaveButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
+};
+const handleUpdateButtonPress = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    //
+  //   let tweet = $('#editForm').val();
+  
+  //   async function updateTweet() {
+  //     const result = await axios({
+  //       method: 'put',
+  //       url: `https://comp426fa19.cs.unc.edu/a09/tweets/${event.target.parentElement.id}`,
+  //       withCredentials: true,
+  //       data: {
+  //         body: tweet,
+  //       },
+  //     });
+  //     $(`.${event.target.parentElement.id}`).replaceWith(renderMyTweets(result.data));
+  //     // listeners
+  //     $('#myEdit_button').on("click", handleEditButtonPress);
+  //     $('#myDelete_button').on("click", handleDestroyButtonPress);
+  //     $('#myRetweet_button').on("click", handleRetweetButton);
+  //     $('#myReply_button').on("click", handleReplyButton);
+  //   }
+  //   updateTweet();
+  // };
 };
 
 const loadDom = function() {
