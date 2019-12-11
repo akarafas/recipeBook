@@ -9,15 +9,15 @@ const renderUserProfile = function(username, name, email) {
   
     return `<div id="userProf">
           <div>
-          <section class="hero is-bold is-dark">
+          <section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
               <div class="container">
                 <h1 class="title">
-                  Recipe Book
+                  My Profile
                 </h1>
-                <h2 class="subtitle">
-                  COMP426
-                </h2>
               </div>
               <div class="section buttons">
                 <button id="home_button" class="button is-primary is-light">Home</button>
@@ -87,14 +87,17 @@ const renderUserProfile = function(username, name, email) {
     return `<div id="editProf">
           <div>
           <div>
-          <section class="hero is-bold is-dark">
+          <section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
               <div class="container">
                 <h1 class="title">
-                  Recipe Book
+                  Edit Profile
                 </h1>
                 <h2 class="subtitle">
-                  COMP426
+                  Make some changes!
                 </h2>
               </div>
               <div class="section buttons">

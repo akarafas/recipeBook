@@ -6,14 +6,17 @@ const renderSecretPage = function() {
     return `<div id="everything">
           <div>
           <div>
-          <section class="hero is-bold is-dark">
+          <section>
             <div class="hero-body">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
               <div class="container">
                 <h1 class="title">
-                  Recipe Book
+                  Secret Recipes Homepage
                 </h1>
                 <h2 class="subtitle">
-                  COMP426
+                  Post recipes only YOU want to see...
                 </h2>
               </div>
               <div class="section buttons">
@@ -46,7 +49,7 @@ const renderSecretPage = function() {
 const renderCreate = function() {
     $('#root').on("click", "#create_button", handleCreateButtonPress);
     $('#root').on("click", "#posttweetCancel_button", handlePostCancelButtonPress);
-    return `<section class="hero is-info" id="create">
+    return `<section class="hero is-warning" id="create">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
