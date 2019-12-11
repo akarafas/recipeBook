@@ -1,8 +1,12 @@
-const renderUserProfile = function() {
+const renderUserProfile = function(username, name, email) {
     $('#root').on("click", "#home_button", handleHomeButton);
     $('#root').on("click", "#secret_button", handelSecretButton);
     $('#root').on("click", "#edit_button", handleEditButtonPress);
     $('#root').on("click", "#logout_button", handleLogoutButton);
+
+    // let g = grabData(); 
+    // console.log(g);
+  
     return `<div id="userProf">
           <div>
           <section class="hero is-bold is-dark">
@@ -30,16 +34,19 @@ const renderUserProfile = function() {
               <h1 class="title is-4">Name</h1>
                 <div class="container is-fluid">
                   <div class="notification has-text-dark">    
+                    ${name}
                   </div>
                 </div>
               <h1 class="title is-4">Username</h1>
                 <div class="container is-fluid">
                   <div class="notification has-text-dark">
+                  ${username}
                   </div>
                 </div>
               <h1 class="title is-4">Email</h1>
                 <div class="container is-fluid">
                   <div class="notification has-text-dark">
+                  ${email}
                   </div>
                 </div>
             </div>
@@ -130,6 +137,21 @@ const handleEditButtonPress = function (event) {
     $(event.target.closest('#userProf')).replaceWith(renderEditProfile());
 };
 
+// const grabData = function () {
+//   async function createAccount() {
+//     let jwt = localStorage.getItem('jwt');
+
+//     const result = await axios({
+//       method: 'GET',
+//       url:'http://localhost:3000/account/status',
+//       headers: { Authorization: `Bearer ${jwt}` }
+
+//     });
+//     return result;
+//   }
+//   createAccount();
+// }
+
 const handelSecretButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -185,14 +207,31 @@ const handleUpdateButtonPress = function (event) {
   // };
 };
 
-const loadDom = function() {
+const loadDom = function(users) {
     const $root = $('#root');
-    $root.append(renderUserProfile());
+    let username = users.data.user.name;
+    let name = users.data.user.data.fullName;
+    let email = users.data.user.data.email;
+
+    $root.append(renderUserProfile(username, name, email));
   };
   
+  
   $(function() {
+      async function createAccount() {
+        let jwt = localStorage.getItem('jwt');
+    
+        const result = await axios({
+          method: 'GET',
+          url:'http://localhost:3000/account/status',
+          headers: { Authorization: `Bearer ${jwt}` }
+    
+        });
+        return result;
+      }
       async function main() {
-          loadDom();
+          let userInfo = await createAccount();
+          loadDom(userInfo);
       }
       main();
   });
