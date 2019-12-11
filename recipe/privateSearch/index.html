@@ -5,28 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Comp426 Private Search</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
-        <script>
-            /*$( function() {
-                let jwt = localStorage.getItem('jwt');
-
-                const priRoot = new axios.create({
-                    baseURL: "http://localhost:3000/private"
-                })
-
-                async function getRecipes() {
-                    let result = await priRoot.get('/recipes', {
-                        headers: { Authorization: `Bearer ${jwt}`}
-                    });
-
-                    let recipes = Object.keys(result.data.result).sort();
-                    $("#tags").autocomplete({
-                        source: recipes
-                    });
-                }
-
-                getRecipes();
-            });*/
-        </script>
         <style>
            * {
   box-sizing: border-box;
@@ -94,8 +72,6 @@ input[type=submit] {
 
     <body>
         <div id="root"></div>
-        
-
         <section class="hero is-warning" id="searchRecipes">
             <div class="hero-body">
             <div class="container">
@@ -104,7 +80,7 @@ input[type=submit] {
             </h1>
             <h2 class="subtitle">
             <br>
-            <form autocomplete="off" action="/action_page.php">
+            <form autocomplete="off" action="../searchedRecipe/index.html">
             <div class="autocomplete">
             <input type="text" id="myInput" name="myRecipe" placeholder="Type here">
             </div>
@@ -152,6 +128,7 @@ input[type=submit] {
                         b.addEventListener("click", function(e) {
                             /*insert the value for the autocomplete text field:*/
                             inp.value = this.getElementsByTagName("input")[0].value;
+                            localStorage.setItem('searchedRecipe', inp.value);
                             /*close the list of autocompleted values,
                             (or any other open lists of autocompleted values:*/
                             closeAllLists();
@@ -159,7 +136,7 @@ input[type=submit] {
                         a.appendChild(b);
                         }
                         }
-                    }, 1000);
+                    }, 750);
                 });
                 /*execute a function presses a key on the keyboard:*/
                 inp.addEventListener("keyup", function(e) {
@@ -231,14 +208,11 @@ input[type=submit] {
 
                 let recipes = Object.keys(result.data.result).sort();
                 localStorage.setItem('recipes', JSON.stringify(recipes));
-                console.log(recipes);
             }
 
             getRecipes();
 
             let recipes = JSON.parse(localStorage.getItem('recipes'));
-
-            console.log(recipes);
 
             autocomplete(document.getElementById("myInput"), recipes);
         </script>

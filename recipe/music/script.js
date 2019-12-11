@@ -4,6 +4,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#recipes_button", handleRecipesButton);
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#motiv_button", handleMotiveButton);
+    $('#root').on("click", "#search_button", handleSearchButton);
     return `<div>
           <section>
             <div class="hero-body">
@@ -91,6 +92,12 @@ const handleMotiveButton = function (event) {
   event.stopImmediatePropagation();  
   location.href=`/../motiv/index.html`;
 };
+
+const handleSearchButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../privateSearch/index.html`;
+}
 
 const loadDom = function() {
     const $root = $('#root');

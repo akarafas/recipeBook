@@ -1,6 +1,4 @@
-
-
-const renderSearchPage = function() {
+const renderSearchedRecipePage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#recipes_button", handleRecipesButton);
@@ -39,26 +37,56 @@ const renderSearchPage = function() {
           </div>`
 }
 
-/*const renderSearchBar = function() {
-  return `<section class="hero is-warning" id="searchRecipes">
-  <div class="hero-body">
-  <div class="container">
-  <h1 class="title">
-    Search for Recipes!
-  </h1>
-  <h2 class="subtitle">
-  <br>
-  <form autocomplete="off" action="../user_profile/index.html">
-  <div class="autocomplete">
-  <input type="text" id="myInput" name="myRecipe" placeholder="Type here">
-  </div>
-  <input type="submit">
-  </form>
-  </h2>
-  </div>
-  </div>
-  </section>`
-}*/
+const renderNoValidSearch = function() {
+    $('#root').on("click", "#try", handleTryAgainButton);
+    return `<section class="hero is-warning" id="searchRecipes">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Sorry, no recipes match your search :(
+                </h1>
+            </div>
+            <div class="section buttons">
+                <button id="try" class="button is-primary">Search Again</button>
+            </div>
+        </div>
+    </section>`
+}
+
+const renderValidSearch = function(title, ing, inst) {
+    $('#root').on("click", "#try", handleTryAgainButton);
+    return `<section class="hero is-warning" id="searchRecipes">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Here is your recipe!
+                </h1>
+            </div>
+            <div class="section buttons">
+                <button id="try" class="button is-primary">Search Again</button>
+            </div>
+        </div>
+    </section>
+    <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p><strong>${title}</strong></p>
+          <p>Ingredients:</p>
+          <p><small>${ing}</small></p>
+          <p>Instructions:</p>
+          <p><small>${inst}</small></p>
+        </div>
+      </div>
+    </article>
+  </div>`
+}
+
+const handleTryAgainButton = function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    location.href=`../../privateSearch/index.html`;
+}
 
 const handleProfileButton = function (event) {
     event.preventDefault();
@@ -99,8 +127,36 @@ const handleMusicButton = function (event) {
 
 const loadDom = function() {
     const $root = $('#root');
-    $root.append(renderSearchPage());
-    //$root.append(renderSearchBar());
+    $root.append(renderSearchedRecipePage());
+    
+    let searchedRecipe = localStorage.getItem('searchedRecipe');
+
+    if (searchedRecipe == null) {
+        $root.append(renderNoValidSearch());
+    } else {
+        localStorage.removeItem('searchedRecipe');
+        let jwt = localStorage.getItem('jwt');
+
+        const priRoot = new axios.create({
+            baseURL: "http://localhost:3000/private"
+        })
+      
+        async function getRecipes() {
+            return await priRoot.get('/recipes', {
+              headers: { Authorization: `Bearer ${jwt}` }
+            });
+        }
+      
+        (async () => {
+            let info = await getRecipes();
+      
+            let sortedRecipes = Object.keys(info.data.result).sort();
+
+            let recipe = info.data.result[searchedRecipe];
+
+            $root.append(renderValidSearch(recipe.title, recipe.ing, recipe.inst));
+          })();
+    }
   };
   
   $(function() {

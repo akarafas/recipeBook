@@ -6,6 +6,7 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#recipes_button", handleRecipesButton);
     $('#root').on("click", "#gen_button", handleGenButton);
     $('#root').on("click", "#music_button", handleMusicButton);
+    $('#root').on("click", "#search_button", handleSearchButton);
     return `<div>
           <section>
             <div class="hero-body">
@@ -81,6 +82,12 @@ const handleMusicButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   location.href=`../music/index.html`;
+}
+
+const handleSearchButton = function (event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.href=`../privateSearch/index.html`;
 }
 
 const createPic = function () {
