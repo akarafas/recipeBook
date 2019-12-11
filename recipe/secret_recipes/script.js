@@ -324,7 +324,7 @@ const handleHomeButton = function (event) {
 
       let sortedRecipes = Object.keys(info.data.result).sort();
 
-      for (let i = x-1; i >=0; i--) {
+      for (let i=0; i <x; i++) {
         let recipe = info.data.result[sortedRecipes[i]];
         $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
       }
