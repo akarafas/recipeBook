@@ -4,7 +4,6 @@ const renderPrivateHomePage = function() {
     $('#root').on("click", "#recipes_button", handleRecipesButton);
     $('#root').on("click", "#store_button", handleStoreButton);
     $('#root').on("click", "#motiv_button", handleMotiveButton);
-    $('#root').on("click", "#recipes_button", handleRecipesButton);
     return `<div>
           <section class="hero is-bold is-dark">
             <div class="hero-body">
