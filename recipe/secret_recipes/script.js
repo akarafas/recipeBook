@@ -3,7 +3,7 @@ const renderSecretPage = function() {
     $('#root').on("click", "#profile_button", handleProfileButton);
     $('#root').on("click", "#logout_button", handleLogoutButton);
     $('#root').on("click", "#postTweet_button", handlePostButtonPress);
-    return `<div id="editProf">
+    return `<div id="everything">
           <div>
           <div>
           <section class="hero is-bold is-dark">
@@ -165,7 +165,7 @@ const handlePostButtonPress = function(event) {
   const handlePostCancelButtonPress = function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    $('#everything').replaceWith(renderPrivateHomePage());
+    $('#everything').replaceWith(renderSecretPage());
   };
 
 const handleHomeButton = function (event) {

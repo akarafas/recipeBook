@@ -1,5 +1,11 @@
 {
   "akarafas": {
-    "recipes": {}
+    "recipes": {
+      "Plankton's ravioli": {
+        "title": "Plankton's ravioli",
+        "ing": "Ravioli noodles, special sauce, pinch of salt",
+        "inst": "Ravioli ravioli give me the formioli X3"
+      }
+    }
   }
 }

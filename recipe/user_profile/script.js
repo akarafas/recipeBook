@@ -173,8 +173,7 @@ const handleLogoutButton = function (event) {
 const handleCancelButton = function (event) {
   event.preventDefault();
   event.stopImmediatePropagation();
-  $('#editProf').replaceWith(renderUserProfile());
-
+  location.reload();
 };
 
 const handleSaveButton = function (event) {
