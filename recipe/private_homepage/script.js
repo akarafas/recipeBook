@@ -260,7 +260,7 @@ const loadDom = function() {
 
       let sortedRecipes = Object.keys(info.data.result).sort();
 
-      for (let i = x-1; i >=0; i--) {
+      for (let i=0; i < x; i++) {
         let recipe = info.data.result[sortedRecipes[i]];
         //console.log(recipe.name);
         $root.append(renderRecipeCard(recipe.title, recipe.ing, recipe.inst));
