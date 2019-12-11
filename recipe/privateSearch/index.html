@@ -12,24 +12,7 @@
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
-        <script src="script.js"></script>
-        <section class="hero is-warning" id="searchRecipes">
-                <div class="hero-body">
-                <div class="container">
-                <h1 class="title">
-                  Search for Recipes!
-                </h1>
-                <h2 class="subtitle">
-                <br>
-                <form>
-                <input class="input" type="search" id="txt-search" placeholder="Type here">
-                </form>
-                <p id="output"></p>
-                <ul id="matches"></ul>
-                </h2>
-                </div>
-                </div>
-                </section>`
+        <script src="script.js"></script>`
         <script>
             /*const KEY = 'debounce-terms';
 
@@ -57,7 +40,7 @@
                 })();
 
                 localStorage.setItem(KEY, JSON.stringify(terms));
-            }*/
+            }
 
             let search = function(ev){
                 document.getElementById('txt-search').addEventListener('input', efficientSearch);
@@ -148,7 +131,7 @@
                 .catch(err=>console.warn(err));
             }, 300);
 
-            document.addEventListener('DOMContentLoaded', search);
+            document.addEventListener('DOMContentLoaded', search);*/
         </script>
     </body>
 </html>

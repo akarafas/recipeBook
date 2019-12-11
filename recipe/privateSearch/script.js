@@ -36,7 +36,25 @@ const renderSearchPage = function() {
               <li id="motiv_button"><a>Need motivation?</a></li>
               <li id="music_button"><a>Let's listen to some music!</a></li>
             </ul>
-          </div>`
+          </div>
+
+          <section class="hero is-warning" id="searchRecipes">
+                <div class="hero-body">
+                <div class="container">
+                <h1 class="title">
+                  Search for Recipes!
+                </h1>
+                <h2 class="subtitle">
+                <br>
+                <form>
+                <input class="input" type="search" id="txt-search" placeholder="Type here">
+                </form>
+                <p id="output"></p>
+                <ul id="matches"></ul>
+                </h2>
+                </div>
+                </div>
+                </section>`
 }
 
 const handleProfileButton = function (event) {
