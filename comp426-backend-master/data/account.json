@@ -48,6 +48,20 @@
         "fullName": "a",
         "email": "a"
       }
+    },
+    "test": {
+      "passwordHash": "$2a$10$7TMrZrx6.UGZogBTnrSgUeO.wobvsdTQ1bzOmg0psE8YQgxyaF1Em",
+      "data": {
+        "fullName": "Test",
+        "email": "test@gmail.com"
+      }
+    },
+    "testing": {
+      "passwordHash": "$2a$10$W6oa9pSCpZDdvNG.s.cvSubwDTIkjoFPuoLO1vneeXOYYeVldLJpa",
+      "data": {
+        "fullName": "testing",
+        "email": "testing@gmail.com"
+      }
     }
   }
 }

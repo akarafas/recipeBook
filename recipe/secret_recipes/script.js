@@ -316,10 +316,10 @@ const handleHomeButton = function (event) {
       let info = await getRecipes();
       let x;
 
-      if (Object.keys(info.data.result).length < 10) {
+      if (Object.keys(info.data.result).length < 50) {
         x = Object.keys(info.data.result).length;
       } else {
-        x = 10;
+        x = 50;
       }
 
       let sortedRecipes = Object.keys(info.data.result).sort();
